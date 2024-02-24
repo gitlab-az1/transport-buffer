@@ -47,7 +47,7 @@ export class BodyEncoder<T = any> {
     this.#o = options;
 
     if(typeof body === 'object' &&
-      !isPlainObject(body)) {
+      (!isPlainObject(body) && !Array.isArray(body))) {
       throw new Exception(`body cannot be a instance of '${body?.constructor.name ?? '[undefined]'}'`);
     }
 
