@@ -1,7 +1,8 @@
 import hash from 'cryptx-sdk/hash';
 import XBuffer from 'cryptx-sdk/buffer';
+import { deepCompare } from 'cryptx-sdk/core';
 import { unmask } from 'cryptx-sdk/node-buffer';
-import { deepCompare, AES, SymmetricKey } from 'cryptx-sdk';
+import { AES, SymmetricKey } from 'cryptx-sdk/symmetric';
 
 import { Exception } from './_internals/errors';
 import { jsonSafeParser } from './_internals/safe-json';
