@@ -2342,10 +2342,10 @@ crypto-js@^4.2.0:
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
   integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
 
-cryptx-sdk@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/cryptx-sdk/-/cryptx-sdk-1.2.1.tgz#3c9a69e763a4fd9ddc0e06e9bf572062767905fb"
-  integrity sha512-5+Ujr0Jzp+1sQOqLkPx6KKLA+3K0NG6SZD2mchrftIC2aNM8CZkWnZSVt3nBlfYX+PT4XfUeZbf1geHbCYuUMQ==
+cryptx-sdk@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/cryptx-sdk/-/cryptx-sdk-1.2.3.tgz#796f2eee12e96764ccff7fe42f6bc28a864d958a"
+  integrity sha512-crKzLyjZqG51zekAD1Vc4HXk9RPHoVY5XOkNPdWl0M/0aAJd2g99bjYcJd0IOUzcc+fMSLMS7Xvmf6YbtQxSgw==
   dependencies:
     argon2 "^0.31.2"
     argon2-browser "^1.18.0"

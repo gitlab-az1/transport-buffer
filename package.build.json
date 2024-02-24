@@ -1,6 +1,6 @@
 {
   "name": "transport-buffer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "repository": "https://github.com/gitlab-az1/transport-buffer.git",
   "author": "gitlab-az1 <gitlab.az1@gmail.com>",
   "license": "AGPL-3.0-only",
@@ -8,6 +8,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "cryptx-sdk": "^1.2.1"
+    "cryptx-sdk": "^1.2.3"
   }
 }
