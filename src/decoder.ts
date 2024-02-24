@@ -77,6 +77,10 @@ export class BodyDecoder {
       throw new Exception('Faield to verify signature of this content');
     }
 
+    if(d.payload.ttl && Date.now() > d.payload.ttl) {
+      throw new Exception('Payload life time was expired');
+    }
+
     const v = d.payload.payload === '[null]' ? null : jsonSafeParser(d.payload.payload);
 
     if(v && v.isLeft()) {
@@ -109,7 +113,7 @@ export class BodyDecoder {
   }
 
   public [Symbol.toStringTag]() {
-    return '[object ';
+    return '[object BodyDecoder]';
   }
 }
 

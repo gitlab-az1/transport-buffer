@@ -243,6 +243,10 @@ export class BodyEncoder<T = any> {
       usages: ['encrypt', 'decrypt', 'sign', 'verify'],
     });
   }
+
+  public [Symbol.toStringTag]() {
+    return '[object BodyEncoder]';
+  }
 }
 
 export default BodyEncoder;
