@@ -1,8 +1,8 @@
 import hash from 'cryptx-sdk/hash';
 import XBuffer from 'cryptx-sdk/buffer';
-import { mask } from 'cryptx-sdk/node-buffer';
 import { SymmetricKey, AES } from 'cryptx-sdk/symmetric';
 
+import { mask } from './_internals/buffer';
 import { Exception } from './_internals/errors';
 import { jsonSafeStringify } from './_internals/safe-json';
 import { assertString, isPlainObject } from './_internals/utils';
