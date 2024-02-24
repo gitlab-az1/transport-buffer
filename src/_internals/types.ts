@@ -129,5 +129,6 @@ export interface ResponseLike {
   setHeader(name: string, value: string | string[]): void;
   hasHeader(name: string): boolean;
   removeHeader(name: string): void;
-  cookie(name: string, val: any, options?: any): ResponseLike;
+  cookie?(name: string, val: any, options?: any): ResponseLike;
+  setCookie?(name: string, value: string | string[]): void;
 }

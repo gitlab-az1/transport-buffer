@@ -194,8 +194,20 @@ export class BodyEncoder<T = any> {
       res.setHeader(name, value);
     }
 
-    for(const [name, value] of Object.entries(this.#c)) {
-      res.cookie(name, value);
+    if(res.cookie && typeof res.cookie === 'function') {
+      for(const [name, value] of Object.entries(this.#c)) {
+        res.cookie(name, value);
+      }
+    } else if(res.setCookie && typeof res.setCookie === 'function') {
+      for(const [name, value] of Object.entries(this.#c)) {
+        res.setCookie(name, value);
+      }
+    } else {
+      const values = Object.entries(this.#c).map(([key, value]) => {
+        return `${key}=${value}`;
+      });
+
+      res.setHeader('Set-Cookie', values.join(';'));
     }
 
     // eslint-disable-next-line no-extra-boolean-cast
