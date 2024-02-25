@@ -27,11 +27,11 @@ export class BodyDecoder {
     if(!!key && key instanceof SymmetricKey) {
       this.#key = key;
     } else {
-      if(!process.env.T_BUFFER_KEY) {
+      if(!process.env.T_BUFFER_KEY && !process.env.NEXT_PUBLIC_T_BUFFER_KEY) {
         throw new Exception('Missing encryption key for transport-buffer, you can use a environment variable `T_BUFFER_KEY`');
       }
   
-      const keyArr = XBuffer.fromString(process.env.T_BUFFER_KEY).buffer;
+      const keyArr = XBuffer.fromString((process.env.T_BUFFER_KEY ?? process.env.NEXT_PUBLIC_T_BUFFER_KEY) as string).buffer;
 
       this.#key = new SymmetricKey(keyArr, {
         algorithm: this.#cipherName,
@@ -43,7 +43,7 @@ export class BodyDecoder {
       throw new Exception('The provided key is too short');
     }
 
-    if(!process.env.CLIB_NO_BUFFER_UTIL) {
+    if(!process.env.CLIB_NO_BUFFER_UTIL && process.env.NEXT_PUBLIC_CLIB_NO_BUFFER_UTIL !== '0') {
       process.env.CLIB_NO_BUFFER_UTIL = '1';
     } else {
       this.#hasBufferUtilVar = true;
@@ -51,9 +51,11 @@ export class BodyDecoder {
   }
 
   async #readContent<T>(content: Uint8Array): Promise<Parsed<T>> {
+    const mask = process.env.T_BUFFER_MASK ?? process.env.NEXT_PUBLIC_T_BUFFER_MASK;
+
     // eslint-disable-next-line no-extra-boolean-cast
-    if(!!process.env.T_BUFFER_MASK) {
-      const m = XBuffer.fromString(process.env.T_BUFFER_MASK.trim().replace(/\s+/g, ''),
+    if(!!mask) {
+      const m = XBuffer.fromString(mask.trim().replace(/\s+/g, ''),
         { encoding: 'hex' });
 
       unmask(content as Buffer, m.buffer as Buffer);

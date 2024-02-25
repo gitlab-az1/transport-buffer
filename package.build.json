@@ -1,6 +1,6 @@
 {
   "name": "transport-buffer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "repository": "https://github.com/gitlab-az1/transport-buffer.git",
   "author": "gitlab-az1 <gitlab.az1@gmail.com>",
   "license": "AGPL-3.0-only",

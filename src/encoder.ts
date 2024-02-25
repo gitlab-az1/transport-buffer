@@ -178,9 +178,11 @@ export class BodyEncoder<T = any> {
     const e = await c.encrypt(payload);
     let o: Uint8Array = Buffer.alloc(e.length);
 
+    const mk = process.env.T_BUFFER_MASK ?? process.env.NEXT_PUBLIC_T_BUFFER_MASK;
+
     // eslint-disable-next-line no-extra-boolean-cast
-    if(!!process.env.T_BUFFER_MASK) {
-      const m = Buffer.from(process.env.T_BUFFER_MASK.trim().replace(/\s+/g, ''), 'hex');
+    if(!!mk) {
+      const m = Buffer.from(mk.trim().replace(/\s+/g, ''), 'hex');
       mask(Buffer.from(e.buffer), m, o as Buffer, 0, e.length);
     } else {
       o = e.buffer;
@@ -211,7 +213,7 @@ export class BodyEncoder<T = any> {
     }
 
     // eslint-disable-next-line no-extra-boolean-cast
-    res.setHeader('Content-Type', !!process.env.T_BUFFER_MASK ? 'text/plain' : 'application/json; charset=UTF-8');
+    res.setHeader('Content-Type', 'text/plain');
     res.setHeader('Content-Length', o.byteLength.toString());
 
     res.send(Buffer.isBuffer(o) ? o : Buffer.from(o));
@@ -233,11 +235,11 @@ export class BodyEncoder<T = any> {
   #retrieveKey(): SymmetricKey {
     if(!!this.#key && this.#key instanceof SymmetricKey) return this.#key;
 
-    if(!process.env.T_BUFFER_KEY) {
+    if(!process.env.T_BUFFER_KEY && !process.env.NEXT_PUBLIC_T_BUFFER_KEY) {
       throw new Exception('Missing encryption key for transport-buffer, you can use a environment variable `T_BUFFER_KEY`');
     }
 
-    const keyArr = XBuffer.fromString(process.env.T_BUFFER_KEY).buffer;
+    const keyArr = XBuffer.fromString((process.env.T_BUFFER_KEY ?? process.env.NEXT_PUBLIC_T_BUFFER_KEY) as string).buffer;
     return new SymmetricKey(keyArr, {
       algorithm: this.#cipherName,
       usages: ['encrypt', 'decrypt', 'sign', 'verify'],
