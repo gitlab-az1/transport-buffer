@@ -216,6 +216,7 @@ export class BodyEncoder<T = any> {
     res.setHeader('Content-Type', 'text/plain');
     res.setHeader('Content-Length', o.byteLength.toString());
 
+    res.status(this.#o.statusCode);
     res.send(Buffer.isBuffer(o) ? o : Buffer.from(o));
     res.end();
 

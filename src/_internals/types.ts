@@ -123,7 +123,7 @@ export type DataType =
 
 
 export interface ResponseLike {
-  send(arg_0: string | Uint8Array): ResponseLike;
+  send(arg_0: string | Uint8Array): ResponseLike | void;
   status(code: number): ResponseLike;
   end(): void;
   setHeader(name: string, value: string | string[]): void;
