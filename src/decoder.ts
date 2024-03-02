@@ -83,9 +83,8 @@ export class BodyDecoder {
       throw new Exception('Payload life time was expired');
     }
 
-    // const v = d.payload.payload === '[null]' ? null : jsonSafeParser(d.payload.payload);
-    const v = jsonSafeParser(d.payload.payload);
-
+    const v = d.payload.payload === '[null]' ? null : jsonSafeParser(d.payload.payload);
+    
     if(v && v.isLeft()) {
       throw new Exception('Failed to parse content payload');
     }
